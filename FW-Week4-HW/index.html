@@ -4,38 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-    <title>FE Class Week3</title>
+    <title>FE Class Week3 Homework</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="main.css">
-
 </head>
+<body class="container rounded mx-auto d-block" >   
+    <br><br>
+    <div class="card">
+        <div class="card-body">
+            <div class="row mx-auto justify-content:space-evenly">
+                <div class="col-sm">
+                    <div class="form-group ">
+                        <label for="new-musician-name">Musician Name</label>
+                        <input type="text" class="form-control" id="new-musician-name" placeholder="NewMusicianName">
+                    
+                    </div> <!-- end of form-group -->
+                </div> <!-- end col-sm -->
+            </div> <!-- end row-->
 
-<!-- Quiz code to make sure bootstrap and jquery are working!-->
-<body class="container-fluid mx-auto text-center " >   
-    Fluid - fills entire width of screen.
-    <div class="row border border-dark">
-        <div class="col-sm border  border-dark d-block">
-                25% width of screen
-        </div>
-        <div class="col-md-6 border border-dark d-block">
-                50% width of screen
-                <div class="row border border-dark d-block-inline">
-                    <div class="col border border-dark d-block-inline">
-                        75% width of parent
-                    </div>
-                    <div class="col-sm-3 border border-dark d-block-inline">
-                        25% width of parent
-                    </div>
-                </div>  
-        </div>
-        <div class="col-sm border border-dark d-block-inline">
-                25% width of screen 
-        </div>          
-    </div> <!-- End of div "row" -->
-    <script src="nodemodules/jquery/dist/jquery.slim.min.js"></script>
-    <script src="nodemodules/@popperjs/core/disk/umd/popper.min.js"></script>
+            <div>
+                <button id="new-musician" class="btn btn-primary from-control">Create Musician</button>
+            </div> <!-- end of button div -->
+        </div> <!-- end of card-body -->
+    </div> <br><!-- end card -->
+
+
+    <div id="musicians">
+
+    </div>
+
+    <script src="musicApp.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>  
 </body>
