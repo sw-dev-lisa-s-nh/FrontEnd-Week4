@@ -6,4 +6,4 @@
 
 FrontEndTechnologies is a 6 week course within the FESD Coding Bootcamp
 
-Week 4 Assignments:  Coding Assignment, LinkedIn posts, & Quiz
+Week 4 Assignments:  Coding Assignment, Research, LinkedIn posts, & Quiz
