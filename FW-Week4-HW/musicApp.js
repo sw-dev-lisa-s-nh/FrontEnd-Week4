@@ -9,9 +9,10 @@ class Instrument {
 }
 
 class Musician {
-    constructor(id, name) {
+    constructor(id, name, email) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.instruments = [];
     }
     addMusician(musician) {
@@ -52,6 +53,7 @@ function drawDOM() {
     // for every musician in musicians 
     for (musician of musicians) {
         console.log(musician.name);
+        console.log(musician.email);
         let table = createMusicTable(musician);
         let title = document.createElement('h2');
         title.innerHTML = musician.name;
@@ -103,7 +105,7 @@ function createMusicTable(musician) {
 }
 
 function createDeleteMusicianButton(musician) {
-    let btn = createButton('Delete Musician');
+    let btn = createButton('Delete Musician','btn btn-danger');
     btn.onclick = () => {
         let location = musicians.indexOf(musician);
         musicians.splice(location,1);
@@ -120,15 +122,15 @@ function createInstrumentRow(musician, table, instrument) {
     actions.appendChild(createDeleteRowButton(musician, instrument));
 }
 
-function createButton(btnLabel) {
+function createButton(btnLabel, className) {
     let btn = document.createElement('button');
-    btn.className = 'btn btn-primary';
+    btn.className = className;
     btn.innerHTML = btnLabel;
     return btn;
 }
 
 function createNewInstrumentButton(musician) {
-    let btn = createButton('Create Instrument');
+    let btn = createButton('Create Instrument', 'btn btn-primary');
     btn.onclick = () => {
         musician.instruments.push(new Instrument(getValue(`instrument-input-${musician.id}`), getValue(`section-input-${musician.id}`)));
         drawDOM();
@@ -137,7 +139,7 @@ function createNewInstrumentButton(musician) {
 }
 
 function createDeleteRowButton(musician, instrument) {
-    let btn = createButton('Delete Instrument');
+    let btn = createButton('Delete Instrument', 'btn btn-danger');
     btn.onclick = () => {
         let location = musician.instruments.indexOf(instrument);
         musician.instruments.splice(location,1);
