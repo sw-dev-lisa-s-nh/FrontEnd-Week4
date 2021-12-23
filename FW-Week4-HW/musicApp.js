@@ -29,9 +29,29 @@ let musicians = [];
 let musicId = 0;
 
 onClick('new-musician', () => {
-    musicians.push(new Musician(musicId++, getValue('new-musician-name')));
+    musicians.push(new Musician(musicId++, getValue('new-musician-name'), getValue('new-musician-email')));
+    let name = getValue('new-musician-name');
     drawDOM();
+    console.log('Musician created: ' + name);
 });
+
+// 2021-10-05-fesd-nashua -- Instructor:  Jeff Haupt
+//      12/21/21 Class Example!
+// Jeff Haupt showed us how to do email validation in class 
+//      I cloned some of his code here.
+let smallText = document.getElementById('emailHelp');
+
+let emailAddress = document.getElementById('new-musician-email');
+emailAddress.addEventListener('keyup', () => {
+    if (/^[^@]+@\w+(\.\w+)+\w$/.test(emailAddress.value)) {
+        smallText.innerHTML = 'Email address accepted!';
+        smallText.setAttribute('style', 'color:blue;');
+    } else {
+        smallText.innerHTML = 'NOT a VALID Email Format -- keep trying!';
+        smallText.setAttribute('style', 'color:red;');
+    }
+});
+// END of Jeff Haupt's code from class -- with a few tweaks!
 
 function onClick(id, action) {
     let element = document.getElementById(id);
@@ -52,8 +72,6 @@ function drawDOM() {
     }
     // for every musician in musicians 
     for (musician of musicians) {
-        console.log(musician.name);
-        console.log(musician.email);
         let table = createMusicTable(musician);
         let title = document.createElement('h2');
         title.innerHTML = musician.name;
@@ -61,23 +79,29 @@ function drawDOM() {
         musicDiv.appendChild(title);
         musicDiv.appendChild(table);
         for (instrument of musician.instruments) {
-            console.log(instrument.instrument);
             createInstrumentRow(musician, table, instrument);
         }       
     }
     document.getElementById('new-musician-name').value = '';
+    document.getElementById('new-musician-email').value = '';
+    smallText.innerHTML = 'For our use only!!!';  
+    smallText.setAttribute('style', 'color:blue;');
+
 }
 
 function createMusicTable(musician) {
     let table = document.createElement('table');
-    table.setAttribute('class', 'table table-primary table-striped');
+    table.setAttribute('class', 'table table-primary table-striped m-2');
     let row = table.insertRow(0);
     let instrumentColumn = document.createElement('th');
     let sectionColumn = document.createElement('th');
+    let buttonColumn = document.createElement('th');
     instrumentColumn.innerHTML = 'Instrument';
     sectionColumn.innerHTML = 'Section';
+    buttonColumn.innerHTML = "Options";
     row.appendChild(instrumentColumn);
     row.appendChild(sectionColumn);
+    row.appendChild(buttonColumn);
 
     let formRow = table.insertRow(1);
     let instrumentTh = document.createElement('th');
@@ -108,8 +132,10 @@ function createDeleteMusicianButton(musician) {
     let btn = createButton('Delete Musician','btn btn-danger');
     btn.onclick = () => {
         let location = musicians.indexOf(musician);
+        let deletedName = musician.name;
         musicians.splice(location,1);
         drawDOM();
+        console.log('Musician deleted: ' + deletedName);
     };
     return btn;
 }
@@ -133,7 +159,9 @@ function createNewInstrumentButton(musician) {
     let btn = createButton('Create Instrument', 'btn btn-primary');
     btn.onclick = () => {
         musician.instruments.push(new Instrument(getValue(`instrument-input-${musician.id}`), getValue(`section-input-${musician.id}`)));
+        let name = getValue(`instrument-input-${musician.id}`);
         drawDOM();
+        console.log('Instrument created: ' + name);
     };
     return btn;
 }
@@ -142,8 +170,10 @@ function createDeleteRowButton(musician, instrument) {
     let btn = createButton('Delete Instrument', 'btn btn-danger');
     btn.onclick = () => {
         let location = musician.instruments.indexOf(instrument);
+        let deleteName = instrument.instrument;
         musician.instruments.splice(location,1);
         drawDOM();
+        console.log('Instrument deleted: ' + deleteName);
     };
     return btn;
 }
